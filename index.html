@@ -42,7 +42,10 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;
              linear-gradient(rgba(7,9,15,.78),rgba(7,9,15,.95))}
 main{width:100%;max-width:880px;display:grid;grid-template-columns:repeat(6,1fr);gap:14px;align-content:start}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:clamp(18px,3vw,28px);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);animation:up .6s ease both}
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);animation:up .6s ease both;transition:border-color .25s,box-shadow .25s}
+@media (hover:hover){
+  .card:hover{border-color:rgba(124,156,255,.24);box-shadow:0 18px 60px rgba(0,0,0,.2)}
+}
 .card:nth-child(2){animation-delay:.08s}.card:nth-child(3){animation-delay:.16s}.card:nth-child(4){animation-delay:.24s}
 @keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .hero{grid-column:span 6;display:flex;gap:26px;align-items:center}
@@ -79,9 +82,17 @@ a:focus-visible,button:focus-visible,.bar:focus-visible{outline:2px solid var(--
 
 /* Player */
 .player{display:grid;grid-template-columns:56px minmax(0,1fr) 46px;align-items:center;gap:16px}
-.cover{width:56px;height:56px;border-radius:12px;object-fit:cover;flex:none}
+.cover{width:56px;height:56px;border-radius:12px;object-fit:cover;flex:none;transition:box-shadow .25s}
+.player-card.is-playing .cover{box-shadow:0 0 0 2px rgba(124,156,255,.35),0 0 24px rgba(124,156,255,.2)}
 .meta{min-width:0}
-.song{font-weight:600;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.song-line{display:flex;align-items:center;gap:10px;min-width:0}
+.song{flex:1;min-width:0;font-weight:600;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.equalizer{display:flex;align-items:flex-end;gap:3px;height:16px;opacity:0;flex:none;transition:opacity .2s}
+.equalizer.is-playing{opacity:1}
+.equalizer i{display:block;width:3px;height:7px;border-radius:999px;background:var(--accent)}
+.equalizer.is-playing i{animation:eq .8s ease-in-out infinite alternate}
+.equalizer i:nth-child(2){animation-delay:.15s}.equalizer i:nth-child(3){animation-delay:.3s}.equalizer i:nth-child(4){animation-delay:.1s}
+@keyframes eq{from{height:4px}to{height:16px}}
 .times{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.76rem;margin-top:8px;font-variant-numeric:tabular-nums}
 .player-status{display:block;color:var(--muted);font-size:.72rem;margin-top:4px}
 .player-status:empty{display:none}
@@ -152,14 +163,17 @@ footer{grid-column:span 6;text-align:center;color:var(--muted);font-size:.8rem;p
     <div class="player">
       <img class="cover" src="https://images.genius.com/067a0495744df8a2463beb19041ca5da.1000x1000x1.jpg" alt="Album cover for なとり - フライデー・ナイト" width="56" height="56" loading="lazy" decoding="async">
       <div class="meta">
-        <div class="song">なとり - フライデー・ナイト</div>
+        <div class="song-line">
+          <div class="song">なとり - フライデー・ナイト</div>
+          <span class="equalizer" id="equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        </div>
         <div class="times"><span id="cur">0:00</span>
           <div class="bar" id="bar" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0:00"><span id="prog"></span></div>
           <span id="dur">0:00</span></div>
         <span class="player-status" id="playerStatus" role="status" aria-live="polite"></span>
       </div>
       <button class="btn" id="play" type="button" aria-label="Play" aria-pressed="false"><i class="ri-play-fill"></i></button>
-      <audio id="audio" loop preload="metadata" src="https://files.catbox.moe/1arsea.mp3"></audio>
+      <audio id="audio" loop autoplay preload="metadata" src="https://files.catbox.moe/1arsea.mp3"></audio>
     </div>
   </section>
 
@@ -180,14 +194,17 @@ document.querySelectorAll(".pill img").forEach(im=>im.addEventListener("error",(
 
 const a=document.getElementById("audio"),btn=document.getElementById("play"),bar=document.getElementById("bar"),
  prog=document.getElementById("prog"),cur=document.getElementById("cur"),dur=document.getElementById("dur"),
+ playerCard=document.querySelector(".player-card"),equalizer=document.getElementById("equalizer"),
  status=document.getElementById("playerStatus");
 const fmt=s=>isFinite(s)?Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0"):"0:00";
 const setStatus=message=>{status.textContent=message};
-const updateIcon=()=>{btn.innerHTML=`<i class="ri-${a.paused?"play":"pause"}-fill"></i>`;btn.setAttribute("aria-label",a.paused?"Play":"Pause");btn.setAttribute("aria-pressed",String(!a.paused))};
+const updateIcon=()=>{const playing=!a.paused;btn.innerHTML=`<i class="ri-${playing?"pause":"play"}-fill"></i>`;btn.setAttribute("aria-label",playing?"Pause":"Play");btn.setAttribute("aria-pressed",String(playing));playerCard.classList.toggle("is-playing",playing);equalizer.classList.toggle("is-playing",playing)};
 const updateProgress=()=>{const p=a.duration?a.currentTime/a.duration*100:0;prog.style.width=p+"%";bar.setAttribute("aria-valuenow",String(Math.round(p)));bar.setAttribute("aria-valuetext",fmt(a.currentTime)+" of "+fmt(a.duration));cur.textContent=fmt(a.currentTime)};
 const seekTo=ratio=>{if(!isFinite(a.duration))return;a.currentTime=Math.min(1,Math.max(0,ratio))*a.duration;updateProgress()};
 a.volume=.6;
+const tryAutoplay=()=>{a.play().catch(()=>setStatus("Autoplay is blocked — press Play to start."))};
 a.addEventListener("loadedmetadata",()=>{dur.textContent=fmt(a.duration);updateProgress()});
+a.addEventListener("canplay",tryAutoplay,{once:true});
 a.addEventListener("timeupdate",updateProgress);
 a.addEventListener("play",()=>{setStatus("");updateIcon()});
 a.addEventListener("pause",updateIcon);
@@ -198,7 +215,10 @@ bar.addEventListener("keydown",e=>{
   if(e.key==="Home"||e.key==="End"){e.preventDefault();seekTo(e.key==="Home"?0:1)}
 });
 btn.addEventListener("click",e=>{e.stopPropagation();if(a.paused){a.play().catch(()=>setStatus("Unable to play music. Try again."))}else a.pause()});
-updateIcon();
+const resumeOnInteraction=e=>{const target=e.target;if(target?.closest?.("#play"))return;if(a.paused)a.play().catch(()=>{})};
+window.addEventListener("pointerdown",resumeOnInteraction,{once:true});
+window.addEventListener("keydown",resumeOnInteraction,{once:true});
+updateIcon();tryAutoplay();
 document.getElementById("year").textContent=new Date().getFullYear();
 </script>
 </body>
