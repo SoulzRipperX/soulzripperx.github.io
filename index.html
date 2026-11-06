@@ -1,443 +1,241 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Developer Profile</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-
-    <!-- Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet"/>
-
-    <style>
-        * { font-family: "Itim", serif; }
-
-        /* Background GIF */
-        body {
-            background: url("https://i.pinimg.com/originals/27/1f/9e/271f9e3efbc58dbb075903c7096ba99c.gif")
-                        no-repeat center center fixed;
-            background-size: cover;
-            cursor: url("https://images.genius.com/067a0495744df8a2463beb19041ca5da.1000x1000x1.jpg") 16 16, auto;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        .animate-slideIn { animation: slideIn 0.6s ease forwards; }
-        .animate-float { animation: float 3s ease-in-out infinite; }
-
-        /* Logos */
-        .logo {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-            transition: 0.25s;
-        }
-        .logo-lg {
-            width: 56px;
-            height: 56px;
-            object-fit: contain;
-        }
-
-        .logo:hover {
-            transform: scale(1.12);
-            filter: brightness(1.2);
-        }
-
-        .icon-wrap {
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .glitch-text {
-    color: white;
-    position: relative;
-    display: inline-block;
-}
-
-.glitch-text::before,
-.glitch-text::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-}
-
-.glitch-text::before {
-    left: 2px;
-    text-shadow: -2px 0 red;
-    animation: glitch 2s infinite linear alternate-reverse;
-}
-
-.glitch-text::after {
-    left: -2px;
-    text-shadow: -2px 0 blue;
-    animation: glitch 2s infinite linear;
-}
-
-@keyframes glitch {
-    0% { clip-path: inset(0 0 90% 0); }
-    20% { clip-path: inset(10% 0 60% 0); }
-    40% { clip-path: inset(40% 0 35% 0); }
-    60% { clip-path: inset(80% 0 5% 0); }
-    80% { clip-path: inset(50% 0 30% 0); }
-    100% { clip-path: inset(0 0 90% 0); }
-}
-
-        a:focus { outline: 2px solid rgba(99,102,241,0.6); }
-    </style>
-</head>
-
-<body class="text-gray-100 min-h-screen flex items-center justify-center p-4">
-
-    <!-- Hidden autoplay music -->
-    <audio autoplay loop hidden>
-        <source src="https://files.catbox.moe/1arsea.mp3" type="audio/mp3">
-    </audio>
-
-    <div class="container max-w-3xl mx-auto">
-
-        <div class="bg-[#00000080] backdrop-blur-md rounded-xl p-4 md:p-8 shadow-2xl border border-[#334155]">
-
-            <!-- Profile -->
-            <div class="flex flex-col md:flex-row items-center md:items-start gap-6 mb-8">
-                <div class="w-32 h-32 md:w-40 md:h-40 overflow-hidden rounded-full border-4 border-blue-400">
-                    <img src="https://r2.guns.lol/4df8ee08-93e1-4450-bd6d-cc67552212cd.webp" class="w-full h-full object-cover"/>
-                </div>
-
-                <div class="flex-1 text-center md:text-left">
-                    <h1 class="text-3xl md:text-4xl font-bold text-blue-400 animate-slideIn">
-                        SoulzRipperX
-                    </h1>
-                    <p class="text-gray-300 animate-slideIn">Return By Death</p>
-
-                    <div class="space-y-2 text-gray-300 mt-3">
-                        <p><i class="ri-map-pin-line mr-2"></i>Japan</p>
-                        <p><i class="ri-building-line mr-2"></i>Azure 桜 Studios</p>
-                        <p><i class="ri-book-line mr-2"></i>Computer</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Title -->
-            <div class="text-center mb-10 animate-float">
-                <div class="text-center mb-10 animate-float">
-                    <h1 class="text-4xl font-mono relative glitch-text" data-text="Guild Master">Guild Master
-                    </h1>
-                </div>
-
-                <h1 class="text-3xl font-mono">
-                    <span class="text-yellow-400">Games</span>
-                    <span class="text-blue-400">Developer</span>
-                </h1>
-            </div>
-            
-            <!-- Music Player -->
-<div class="music-player">
-    <img class="music-cover" src="https://images.genius.com/067a0495744df8a2463beb19041ca5da.1000x1000x1.jpg">
-
-    <div class="music-info">
-        <div class="music-title">なとり - フライデー・ナイト</div>
-        <div class="music-time">
-            <span id="currentTime">0:00</span>
-            <div class="progress-container" id="progressContainer">
-                <div class="progress" id="progress"></div>
-            </div>
-            <span id="duration">0:00</span>
-        </div>
-    </div>
-
-    <button id="playBtn" class="music-btn">⏸</button>
-
-    <audio id="audio" autoplay loop muted>
-        <source src="https://files.catbox.moe/1arsea.mp3" type="audio/mp3">
-    </audio>
-</div>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SoulzRipperX · Games Developer</title>
+<meta name="description" content="SoulzRipperX — Games Developer and Guild Master at Azure 桜 Studios. Skills in Unity, Unreal, Roblox, Lua, C#, C++ and more.">
+<meta name="theme-color" content="#0b0f1a">
+<meta property="og:title" content="SoulzRipperX · Games Developer">
+<meta property="og:description" content="Guild Master at Azure 桜 Studios. Games developer based in Japan.">
+<meta property="og:image" content="https://r2.guns.lol/4df8ee08-93e1-4450-bd6d-cc67552212cd.webp">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Itim&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 <style>
-.music-player {
-    width: 520px;
-    background: rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(4px);
-    padding: 12px 18px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin: 0 auto;
-    margin-top: 20px;
+:root{
+  --bg:#0b0f1a; --card:rgba(15,20,35,.62); --card-solid:#111827; --line:rgba(148,163,184,.18);
+  --text:#e5e9f2; --muted:#9aa6bd; --blue:#60a5fa; --pink:#f9a8d4; --gold:#fbbf24;
+  --radius:18px;
 }
-
-.music-cover {
-    width: 58px;
-    height: 58px;
-    border-radius: 6px;
-    object-fit: cover;
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Itim",system-ui,sans-serif;color:var(--text);background:var(--bg);
+  min-height:100vh;display:flex;justify-content:center;padding:clamp(14px,4vw,40px);
+  line-height:1.5;-webkit-font-smoothing:antialiased;
 }
-
-.music-info {
-    flex: 1;
-    color: white;
-    font-family: sans-serif;
+/* Background: GIF kept, darkened for readability; fixed via pseudo-element (smooth on mobile) */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:url("https://i.pinimg.com/originals/27/1f/9e/271f9e3efbc58dbb075903c7096ba99c.gif") center/cover no-repeat;
 }
-
-.music-title {
-    font-size: 16px;
-    font-weight: 600;
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;
+  background:radial-gradient(ellipse at top,rgba(11,15,26,.55),rgba(11,15,26,.92) 70%);
 }
-
-.music-time {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 6px;
+main{width:100%;max-width:820px;display:grid;gap:18px;align-content:start}
+.card{
+  background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line);border-radius:var(--radius);padding:clamp(18px,4vw,32px);
+  box-shadow:0 20px 50px -20px rgba(0,0,0,.7);
 }
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
 
-.progress-container {
-    width: 240px;
-    height: 4px;
-    background: rgba(255,255,255,0.3);
-    border-radius: 2px;
-    position: relative;
-    cursor: pointer;
+/* Hero */
+.hero{display:flex;gap:28px;align-items:center}
+.avatar{
+  flex:none;width:150px;height:150px;border-radius:50%;padding:4px;
+  background:conic-gradient(from 0deg,var(--blue),var(--pink),var(--gold),var(--blue));
+  animation:spin 8s linear infinite;
 }
+.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid var(--bg);animation:spin 8s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero h1{font-size:clamp(2rem,6vw,2.8rem);line-height:1.1;background:linear-gradient(90deg,var(--blue),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tagline{color:var(--muted);margin:4px 0 12px;font-size:1.05rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;font-size:.9rem;color:var(--muted);background:rgba(255,255,255,.04)}
+.chip i{color:var(--blue)}
 
-.progress {
-    height: 100%;
-    width: 0%;
-    background: white;
-    border-radius: 2px;
+/* Role */
+.role{text-align:center}
+.glitch{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:clamp(1.8rem,6vw,2.6rem);position:relative;display:inline-block;color:#fff}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;inset:0;overflow:hidden}
+.glitch::before{left:2px;text-shadow:-2px 0 #ff4d6d;animation:glitch 2.4s infinite linear alternate-reverse}
+.glitch::after{left:-2px;text-shadow:2px 0 #4d9fff;animation:glitch 2s infinite linear}
+@keyframes glitch{0%{clip-path:inset(0 0 90% 0)}20%{clip-path:inset(10% 0 60% 0)}40%{clip-path:inset(40% 0 35% 0)}60%{clip-path:inset(80% 0 5% 0)}80%{clip-path:inset(50% 0 30% 0)}100%{clip-path:inset(0 0 90% 0)}}
+.sub{font-family:"JetBrains Mono",monospace;font-size:clamp(1.1rem,3.5vw,1.5rem);margin-top:6px}
+.sub .g{color:var(--gold)} .sub .d{color:var(--blue)}
+
+/* Socials */
+.socials{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px}
+.social{
+  display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:12px;
+  color:var(--text);text-decoration:none;border:1px solid var(--line);background:rgba(255,255,255,.05);
+  transition:transform .2s,background .2s,border-color .2s;
 }
+.social i{font-size:1.3rem}
+.social:hover{transform:translateY(-3px);background:rgba(96,165,250,.14);border-color:var(--blue)}
+.social:focus-visible,.btn:focus-visible,.bar:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
 
-.music-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 22px;
-    cursor: pointer;
+/* Player */
+.player{display:flex;align-items:center;gap:14px}
+.cover{width:60px;height:60px;border-radius:10px;object-fit:cover;flex:none}
+.meta{flex:1;min-width:0}
+.song{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.times{display:flex;align-items:center;gap:10px;font-size:.8rem;color:var(--muted);margin-top:6px;font-variant-numeric:tabular-nums}
+.bar{flex:1;height:6px;background:rgba(255,255,255,.18);border-radius:3px;cursor:pointer;position:relative}
+.bar span{position:absolute;inset:0 auto 0 0;width:0;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--pink))}
+.btn{width:46px;height:46px;flex:none;border-radius:50%;border:0;background:#fff;color:#0b0f1a;font-size:1.4rem;cursor:pointer;display:grid;place-items:center;transition:transform .15s}
+.btn:hover{transform:scale(1.08)}
+
+/* Skills */
+h2{font-family:"JetBrains Mono",monospace;font-size:1.05rem;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+h2::after{content:"";flex:1;height:1px;background:var(--line)}
+.group+.group{margin-top:26px}
+.group h3{font-size:.9rem;font-weight:400;color:var(--muted);margin-bottom:10px;letter-spacing:.08em;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:12px}
+.skill{
+  background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;
+  padding:14px 8px 12px;text-align:center;font-size:.9rem;
+  transition:transform .2s,border-color .2s,background .2s;
+}
+.skill:hover{transform:translateY(-4px);border-color:var(--blue);background:rgba(96,165,250,.1)}
+.ico{height:46px;display:grid;place-items:center;margin-bottom:6px}
+.ico img{width:42px;height:42px;object-fit:contain}
+.ico img.inv{filter:brightness(0) invert(1)}
+.ico i{font-size:2.3rem;color:var(--blue)}
+.ico b{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;background:var(--blue);color:#0b0f1a}
+
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:6px 0 14px}
+
+@media (max-width:620px){
+  .hero{flex-direction:column;text-align:center}
+  .chips{justify-content:center}
+  .avatar{width:130px;height:130px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
 }
 </style>
+</head>
+<body>
+<main>
+
+  <!-- Hero -->
+  <section class="card hero reveal">
+    <div class="avatar"><img src="https://r2.guns.lol/4df8ee08-93e1-4450-bd6d-cc67552212cd.webp" alt="SoulzRipperX profile picture" width="150" height="150"></div>
+    <div>
+      <h1>SoulzRipperX</h1>
+      <p class="tagline">Return By Death</p>
+      <div class="chips">
+        <span class="chip"><i class="ri-map-pin-line"></i>Japan</span>
+        <span class="chip"><i class="ri-building-line"></i>Azure 桜 Studios</span>
+        <span class="chip"><i class="ri-computer-line"></i>Computer</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Role + socials -->
+  <section class="card role reveal">
+    <div class="glitch" data-text="Guild Master">Guild Master</div>
+    <div class="sub"><span class="g">Games</span> <span class="d">Developer</span></div>
+    <nav class="socials" aria-label="Social links">
+      <a class="social" href="https://github.com/SoulzRipperX" target="_blank" rel="noopener noreferrer"><i class="ri-github-fill"></i>GitHub</a>
+      <a class="social" href="https://www.facebook.com/SoulzRipperX/" target="_blank" rel="noopener noreferrer"><i class="ri-facebook-fill"></i>Facebook</a>
+      <a class="social" href="https://www.instagram.com/soulv845/" target="_blank" rel="noopener noreferrer"><i class="ri-instagram-fill"></i>Instagram</a>
+    </nav>
+  </section>
+
+  <!-- Music -->
+  <section class="card player reveal" aria-label="Music player">
+    <img class="cover" src="https://images.genius.com/067a0495744df8a2463beb19041ca5da.1000x1000x1.jpg" alt="Album cover" width="60" height="60">
+    <div class="meta">
+      <div class="song">なとり - フライデー・ナイト</div>
+      <div class="times">
+        <span id="cur">0:00</span>
+        <div class="bar" id="bar" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="prog"></span></div>
+        <span id="dur">0:00</span>
+      </div>
+    </div>
+    <button class="btn" id="play" aria-label="Play or pause"><i class="ri-pause-fill"></i></button>
+    <audio id="audio" loop preload="metadata" src="https://files.catbox.moe/1arsea.mp3"></audio>
+  </section>
+
+  <!-- Skills -->
+  <section class="card reveal" aria-labelledby="skills-h">
+    <h2 id="skills-h">Skills &amp; Tools</h2>
+    <div id="skills"></div>
+  </section>
+
+  <footer>© <span id="year"></span> SoulzRipperX · Built with ♥ in Japan</footer>
+</main>
 
 <script>
-const audio = document.getElementById("audio");
-const playBtn = document.getElementById("playBtn");
-const progress = document.getElementById("progress");
-const progressContainer = document.getElementById("progressContainer");
-const currentTimeEl = document.getElementById("currentTime");
-const durationEl = document.getElementById("duration");
+/* ---------- Skills data ---------- */
+const dev = n => `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${n}/${n}-original.svg`;
+const groups = [
+  {title:"Languages", items:[
+    {n:"HTML5",img:dev("html5")},{n:"CSS3",img:dev("css3")},{n:"JavaScript",img:dev("javascript")},
+    {n:"Python",img:dev("python")},{n:"Lua",img:dev("lua")},{n:"C#",img:dev("csharp")},
+    {n:"C++",img:dev("cplusplus")},{n:"SQL",icon:"ri-database-2-line"}]},
+  {title:"Game Engines", items:[
+    {n:"Unity",img:dev("unity"),inv:1},{n:"Unreal Engine",img:dev("unrealengine"),inv:1},
+    {n:"Roblox Studio",img:"https://cdn.simpleicons.org/roblox/ffffff"},
+    {n:"RPG Maker",img:"https://cdn.prod.website-files.com/5efc0159f9a97ba05a8b2902/65b8b3ed67da93688b2de8d6_header-icon-1-56x56.png"},
+    {n:"GameMaker",img:"https://cdn.simpleicons.org/gamemaker/ffffff"}]},
+  {title:"Tools", items:[
+    {n:"React",img:dev("react")},{n:"MongoDB",img:dev("mongodb")},{n:"GitHub",img:dev("github"),inv:1},
+    {n:"Git",img:dev("git")},{n:"VS Code",img:dev("vscode")},{n:"Terminal",icon:"ri-terminal-box-line"}]}
+];
+const esc = s => s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+document.getElementById("skills").innerHTML = groups.map(g => `
+  <div class="group"><h3>${g.title}</h3><div class="grid">
+  ${g.items.map(i => `
+    <div class="skill"><div class="ico">${
+      i.img ? `<img src="${i.img}" alt="" loading="lazy" class="${i.inv?'inv':''}" data-l="${esc(i.n[0])}">`
+            : `<i class="${i.icon}"></i>`}</div>${esc(i.n)}</div>`).join("")}
+  </div></div>`).join("");
+/* Broken logo -> letter badge */
+document.querySelectorAll(".ico img").forEach(im => im.addEventListener("error", () => {
+  im.replaceWith(Object.assign(document.createElement("b"), {textContent: im.dataset.l}));
+}));
 
-audio.addEventListener("loadedmetadata", () => {
-    durationEl.textContent = formatTime(audio.duration);
+/* ---------- Music player ---------- */
+const a = document.getElementById("audio"), btn = document.getElementById("play"),
+      bar = document.getElementById("bar"), prog = document.getElementById("prog"),
+      cur = document.getElementById("cur"), dur = document.getElementById("dur");
+const fmt = s => isFinite(s) ? `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,"0")}` : "0:00";
+const setIcon = () => btn.innerHTML = `<i class="ri-${a.paused ? "play" : "pause"}-fill"></i>`;
+a.volume = .6;
+a.addEventListener("loadedmetadata", () => dur.textContent = fmt(a.duration));
+a.addEventListener("timeupdate", () => {
+  const p = a.duration ? a.currentTime / a.duration * 100 : 0;
+  prog.style.width = p + "%"; bar.setAttribute("aria-valuenow", Math.round(p));
+  cur.textContent = fmt(a.currentTime);
+});
+a.addEventListener("play", setIcon); a.addEventListener("pause", setIcon);
+const seek = x => { const r = bar.getBoundingClientRect(); a.currentTime = Math.min(1, Math.max(0, (x - r.left) / r.width)) * a.duration; };
+bar.addEventListener("click", e => seek(e.clientX));
+bar.addEventListener("keydown", e => { if (e.key === "ArrowRight") a.currentTime += 5; if (e.key === "ArrowLeft") a.currentTime -= 5; });
+btn.addEventListener("click", e => { e.stopPropagation(); a.paused ? a.play() : a.pause(); });
+/* Browsers block autoplay with sound: try now, otherwise start on the first interaction */
+a.play().catch(() => {
+  setIcon();
+  const go = () => { a.play().catch(()=>{}); };
+  addEventListener("pointerdown", go, {once:true});
+  addEventListener("keydown", go, {once:true});
 });
 
-audio.addEventListener("timeupdate", () => {
-    progress.style.width = (audio.currentTime / audio.duration) * 100 + "%";
-    currentTimeEl.textContent = formatTime(audio.currentTime);
-});
-
-progressContainer.addEventListener("click", (e) => {
-    const width = progressContainer.clientWidth;
-    const clickX = e.offsetX;
-    audio.currentTime = (clickX / width) * audio.duration;
-});
-
-playBtn.addEventListener("click", () => {
-    if (audio.paused) {
-        audio.muted = false;
-        audio.play();
-        playBtn.textContent = "⏸";
-    } else {
-        audio.pause();
-        playBtn.textContent = "▶";
-    }
-});
-
-
-function formatTime(sec) {
-    const m = Math.floor(sec / 60);
-    const s = Math.floor(sec % 60).toString().padStart(2, '0');
-    return `${m}:${s}`;
-}
+/* ---------- Reveal on scroll ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold:.12});
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+document.getElementById("year").textContent = new Date().getFullYear();
 </script>
-
-
-            <!-- Contact Icons -->
-            <div class="flex justify-center space-x-6 mt-8 mb-10">
-                <a href="https://github.com/SoulzRipperX" target="_blank" class="contact-link text-3xl hover:text-blue-400">
-                    <i class="ri-github-fill"></i>
-                </a>
-                <a href="https://www.facebook.com/SoulzRipperX/" target="_blank" class="contact-link text-3xl hover:text-green-400">
-                    <i class="ri-facebook-fill"></i>
-                </a>
-                <a href="https://www.instagram.com/soulv845/" target="_blank" class="contact-link text-3xl hover:text-red-400">
-                    <i class="ri-instagram-fill"></i>
-                </a>
-            </div>
-
-            <!-- ===================== SKILLS SECTION ===================== -->
-            <h2 class="text-xl font-mono text-yellow-300 mb-4">Skills</h2>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-
-                <div class="bg-[#0F172A] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg">
-                    </div>
-                    <p class="mt-2">HTML5</p>
-                </div>
-
-                <div class="bg-[#0F172A] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg">
-                    </div>
-                    <p class="mt-2">CSS3</p>
-                </div>
-
-                <div class="bg-[#0F172A] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png">
-                    </div>
-                    <p class="mt-2">JavaScript</p>
-                </div>
-
-                <div class="bg-[#0F172A] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg">
-                    </div>
-                    <p class="mt-2">Python</p>
-                </div>
-
-                <div class="bg-[#0F172A] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Lua-Logo.svg">
-                    </div>
-                    <p class="mt-2">Lua</p>
-                </div>
-
-                <div class="bg-[#0F172A] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo" src="https://raw.githubusercontent.com/gist/johndward01/95c1d09de9e3707cfb4154989962376d/raw/f74007782421219d9e9ab4b6a27de2e172a8b714/csharp-logo.svg">
-                    </div>
-                    <p class="mt-2">C#</p>
-                </div>
-
-                <div class="bg-[#0F172A] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg">
-                    </div>
-                    <p class="mt-2">C++</p>
-                </div>
-
-                <div class="bg-[#0F172A] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo" src="https://symbols.getvecta.com/stencil_28/61_sql-database-generic.90b41636a8.svg">
-                    </div>
-                    <p class="mt-2">SQL</p>
-                </div>
-
-            </div>
-
-            <!-- ===================== TOOLS SECTION ===================== -->
-            <h2 class="text-xl font-mono text-yellow-300 mb-4">Tools & Technologies</h2>
-
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-
-                <div class="bg-[#1E293B] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg">
-                    </div>
-                    <p class="mt-2 text-xs">React</p>
-                </div>
-
-                <div class="bg-[#1E293B] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo" src="https://www.vectorlogo.zone/logos/mongodb/mongodb-icon.svg">
-                    </div>
-                    <p class="mt-2 text-xs">MongoDB</p>
-                </div>
-
-                <div class="bg-[#1E293B] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo" src="https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_640.png">
-                    </div>
-                    <p class="mt-2 text-xs">GitHub</p>
-                </div>
-
-                <div class="bg-[#1E293B] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/5/51/Windows_Terminal_logo.svg">
-                    </div>
-                    <p class="mt-2 text-xs">Terminal</p>
-                </div>
-
-                <div class="bg-[#1E293B] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg">
-                    </div>
-                    <p class="mt-2 text-xs">VS Code</p>
-                </div>
-
-                <div class="bg-[#1E293B] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo" src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg">
-                    </div>
-                    <p class="mt-2 text-xs">Git</p>
-                </div>
-
-                <div class="bg-[#1E293B] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Roblox_Studio_logo_-_2022.svg">
-                    </div>
-                    <p class="mt-2 text-xs">Roblox Studio</p>
-                </div>
-
-                <div class="bg-[#1E293B] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo" src="https://upload.vectorlogo.zone/logos/unity3d/images/562cc0fa-a6c4-45a3-8412-ef8bce616751.svg">
-                    </div>
-                    <p class="mt-2 text-xs">Unity</p>
-                </div>
-
-                <div class="bg-[#1E293B] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo-lg logo" src="https://www.svgrepo.com/show/342328/unreal-engine.svg">
-                    </div>
-                    <p class="mt-2 text-xs">Unreal Engine</p>
-                </div>
-
-                <div class="bg-[#1E293B] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo-lg logo" src="https://cdn.prod.website-files.com/5efc0159f9a97ba05a8b2902/65b8b3ed67da93688b2de8d6_header-icon-1-56x56.png">
-                    </div>
-                    <p class="mt-2 text-xs">RPG Maker</p>
-                </div>
-
-                <div class="bg-[#1E293B] p-4 rounded-lg text-center">
-                    <div class="icon-wrap">
-                        <img class="logo-lg logo" src="https://cdn.brandfetch.io/idLXVOChpM/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1758843467180">
-                    </div>
-                    <p class="mt-2 text-xs">GameMaker</p>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
 </body>
 </html>
-
-
