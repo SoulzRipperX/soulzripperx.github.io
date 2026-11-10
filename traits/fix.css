@@ -1,2 +1,2 @@
 .odds-item{color:var(--text)}
-.visitor-counter{display:inline-flex;align-items:center;gap:7px;margin-top:12px;color:#dce3ff;font-size:12px;font-weight:700}.visitor-counter i{font-size:16px;color:#fff}
+.visitor-counter{display:inline-flex;align-items:center;gap:7px;margin-top:12px;color:#dce3ff;font-size:12px;font-weight:700}.visitor-eye{width:17px;height:17px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
