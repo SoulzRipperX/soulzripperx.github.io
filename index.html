@@ -127,6 +127,7 @@ footer{grid-column:span 6;text-align:center;color:var(--muted);font-size:.8rem;p
   .times{gap:6px;font-size:.7rem}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.visitor-counter{display:inline-flex;align-items:center;gap:7px;margin-top:12px;color:var(--text);font-size:.82rem;font-weight:600}.visitor-counter i{font-size:1rem;color:var(--accent)}
 </style>
 </head>
 <body>
@@ -137,6 +138,7 @@ footer{grid-column:span 6;text-align:center;color:var(--muted);font-size:.8rem;p
       <span class="badge"><i class="ri-shield-star-line"></i>Guild Master</span>
       <h1><span>SoulzRipperX</span></h1>
       <p class="tag">Return By Death</p>
+      <span class="visitor-counter" data-counter-key="soulzripperx-home" aria-label="Website visits"><i class="ri-eye-line"></i><span data-count>—</span></span>
       <div class="chips">
         <span class="chip"><i class="ri-map-pin-line"></i>Japan</span>
         <span class="chip"><i class="ri-building-line"></i>Azure 桜 Studios</span>
@@ -221,5 +223,6 @@ window.addEventListener("keydown",resumeOnInteraction,{once:true});
 updateIcon();tryAutoplay();
 document.getElementById("year").textContent=new Date().getFullYear();
 </script>
+<script src="views.js" data-counter-key="soulzripperx-home"></script>
 </body>
 </html>
