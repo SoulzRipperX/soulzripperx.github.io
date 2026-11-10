@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090b17" />
+  <title>Anime Adventures — Trait Reroll</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="stars"></div>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">ANIME ADVENTURES • TRAIT SIMULATOR</p>
+        <h1>Trait <span>Reroll</span></h1>
+        <p class="subtitle">Test your luck before spending your Star Remnants.</p>
+      </div>
+      <div class="hero-badge">UNOFFICIAL<br><small>FAN PROJECT</small></div>
+    </header>
+
+    <section class="dashboard">
+      <div class="panel roll-panel">
+        <div class="panel-heading">
+          <div><p class="kicker">CURRENT ROLL</p><h2 id="resultTitle">Ready to reroll?</h2></div>
+          <div class="roll-number" id="rollNumber">#0000</div>
+        </div>
+        <div class="result-card" id="resultCard">
+          <div class="result-placeholder"><div class="dice">✦</div><p>Choose your luck.<br>Click <b>REROLL TRAIT</b> to begin.</p></div>
+        </div>
+        <div class="controls">
+          <button class="primary" id="rollBtn"><span>✦</span> REROLL TRAIT</button>
+          <div class="quick-rolls">
+            <button class="secondary" data-rolls="10">×10</button>
+            <button class="secondary" data-rolls="100">×100</button>
+          </div>
+        </div>
+        <div class="auto-box">
+          <div class="panel-heading"><div><p class="kicker">AUTO REROLL</p><h2>Hunt for a trait</h2></div><span class="auto-status" id="autoStatus">Idle</span></div>
+          <div class="auto-controls">
+            <select id="autoTarget" aria-label="Choose target trait"></select>
+            <button class="secondary" id="autoStart">START AUTO</button>
+            <button class="stop" id="autoStop" disabled>STOP</button>
+          </div>
+          <p class="auto-help">Auto rolls separately and stops immediately when the selected trait or variant is found. Every roll is saved in the full history.</p>
+        </div>
+      </div>
+
+      <div class="panel stats-panel">
+        <div class="panel-heading"><div><p class="kicker">SESSION STATS</p><h2>Your luck</h2></div><button class="reset" id="resetBtn">Reset</button></div>
+        <div class="stat-grid">
+          <div class="stat"><span>Total rolls</span><strong id="totalRolls">0</strong></div>
+          <div class="stat"><span>Best rarity</span><strong id="bestRarity">—</strong></div>
+          <div class="stat"><span>Star Remnants</span><strong id="remnants">0</strong></div>
+          <div class="stat"><span>Unique chance</span><strong>0.10%</strong></div>
+        </div>
+        <div class="meter-label"><span>Legendary+ luck</span><span id="rareCount">0 rolls</span></div>
+        <div class="meter"><div id="rareMeter"></div></div>
+        <p class="note">This simulator uses the published trait weights and is for entertainment only.</p>
+      </div>
+    </section>
+
+    <section class="panel history-panel">
+      <div class="panel-heading"><div><p class="kicker">ROLL HISTORY</p><h2>Recent traits</h2></div><span class="history-count" id="historyCount">0 results</span></div>
+      <div class="history" id="history"><div class="empty-history">Your recent rolls will appear here.</div></div>
+    </section>
+
+    <section class="panel odds-panel">
+      <div class="panel-heading"><div><p class="kicker">TRAIT ODDS</p><h2>Know your chances</h2></div><span class="updated">13 traits • weights from source data</span></div>
+      <div class="odds-grid" id="oddsGrid"></div>
+    </section>
+
+    <footer>Anime Adventures Trait Reroll is an unofficial fan-made simulator. Anime Adventures is a property of its respective creators.<br><strong>Made By SoulzRipperX</strong></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
